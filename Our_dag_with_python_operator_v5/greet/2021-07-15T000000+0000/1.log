@@ -1,0 +1,35 @@
+[2023-02-18 07:49:45,536] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: Our_dag_with_python_operator_v5.greet 2021-07-15T00:00:00+00:00 [queued]>
+[2023-02-18 07:49:45,620] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: Our_dag_with_python_operator_v5.greet 2021-07-15T00:00:00+00:00 [queued]>
+[2023-02-18 07:49:45,624] {taskinstance.py:1042} INFO - 
+--------------------------------------------------------------------------------
+[2023-02-18 07:49:45,627] {taskinstance.py:1043} INFO - Starting attempt 1 of 6
+[2023-02-18 07:49:45,630] {taskinstance.py:1044} INFO - 
+--------------------------------------------------------------------------------
+[2023-02-18 07:49:45,716] {taskinstance.py:1063} INFO - Executing <Task(PythonOperator): greet> on 2021-07-15T00:00:00+00:00
+[2023-02-18 07:49:45,750] {standard_task_runner.py:52} INFO - Started process 3453 to run task
+[2023-02-18 07:49:45,799] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'Our_dag_with_python_operator_v5', 'greet', '2021-07-15T00:00:00+00:00', '--job-id', '7527', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/create_with_python_operator.py', '--cfg-path', '/tmp/tmpamzmvzm2', '--error-file', '/tmp/tmp8t75dfmt']
+[2023-02-18 07:49:45,837] {standard_task_runner.py:77} INFO - Job 7527: Subtask greet
+[2023-02-18 07:49:46,121] {logging_mixin.py:104} INFO - Running <TaskInstance: Our_dag_with_python_operator_v5.greet 2021-07-15T00:00:00+00:00 [running]> on host 0f019e8bb5cf
+[2023-02-18 07:49:46,350] {taskinstance.py:1257} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=saint
+AIRFLOW_CTX_DAG_ID=Our_dag_with_python_operator_v5
+AIRFLOW_CTX_TASK_ID=greet
+AIRFLOW_CTX_EXECUTION_DATE=2021-07-15T00:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-07-15T00:00:00+00:00
+[2023-02-18 07:49:46,353] {taskinstance.py:1455} ERROR - 'TaskInstance' object has no attribute 'xcoms_pull'
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1112, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1285, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1315, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 117, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 128, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/create_with_python_operator.py", line 7, in greet
+    name = ti.xcoms_pull(task_ids='get_name')
+AttributeError: 'TaskInstance' object has no attribute 'xcoms_pull'
+[2023-02-18 07:49:46,375] {taskinstance.py:1503} INFO - Marking task as UP_FOR_RETRY. dag_id=Our_dag_with_python_operator_v5, task_id=greet, execution_date=20210715T000000, start_date=20230218T074945, end_date=20230218T074946
+[2023-02-18 07:49:46,489] {local_task_job.py:146} INFO - Task exited with return code 1
